@@ -81,7 +81,7 @@ namespace QuickLauncher
 
         private void mainForm_Load(object sender, EventArgs e)
         {
-             if (Directory.Exists(currentDir))
+            if (Directory.Exists(currentDir))
             {
                 lblLimit1.Select();
 
@@ -160,6 +160,8 @@ namespace QuickLauncher
             {
                 string read = File.ReadAllText(portFile);
                 JavaScriptSerializer serializer = new JavaScriptSerializer();
+                serializer.MaxJsonLength = Int32.MaxValue;
+
                 var json = serializer.DeserializeObject(read);
                 Dictionary<string, object> profile = (Dictionary<string, object>)json;
 
@@ -259,6 +261,7 @@ namespace QuickLauncher
             {
                 string read = File.ReadAllText(path);
                 JavaScriptSerializer serializer = new JavaScriptSerializer();
+                serializer.MaxJsonLength = Int32.MaxValue;
                 var json = serializer.DeserializeObject(read);
 
                 Dictionary<string, object> profile = (Dictionary<string, object>)json;
@@ -335,6 +338,7 @@ namespace QuickLauncher
                     {
                         string read = File.ReadAllText(profiles[i]);
                         JavaScriptSerializer serializer = new JavaScriptSerializer();
+                        serializer.MaxJsonLength = Int32.MaxValue;
                         var json = serializer.DeserializeObject(read);
                         Dictionary<string, object> profile = (Dictionary<string, object>)json;
                         Dictionary<string, object> characters = (Dictionary<string, object>)profile["characters"];
